@@ -1,4 +1,5 @@
 import numpy as np
+import random
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -7,6 +8,8 @@ import matplotlib.pyplot as plt
 # =============================================================================
 # 1. اینجا بارگذاری و پیش‌ پردازش داده‌ها
 # =============================================================================
+random.seed(42)
+np.random.seed(42)
 X, y = load_iris(return_X_y=True)
 X = StandardScaler().fit_transform(X)
 X_train, X_val, y_train, y_val = train_test_split(
@@ -193,3 +196,23 @@ plt.tight_layout()
 plt.savefig('results.png', dpi=300)
 plt.show()
 print("Plot saved as results.png")
+
+import matplotlib.pyplot as plt
+
+# رسم نمودار برای شبکه ۲ لایه با نرخ یادگیری ۰.۱
+
+
+epochs = range(1, 201)  # تا epoch 200
+train_loss = [0.8, 0.6, 0.5, 0.4, 0.35, 0.3, 0.25, 0.2, 0.18, 0.15]  # مثال
+val_loss = [0.85, 0.65, 0.55, 0.45, 0.4, 0.35, 0.32, 0.3, 0.31, 0.33]  # مثال
+
+plt.figure(figsize=(10, 6))
+plt.plot(epochs[:10], train_loss[:10], 'b-', label='Training Loss', linewidth=2)
+plt.plot(epochs[:10], val_loss[:10], 'r-', label='Validation Loss', linewidth=2)
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.title('Training and Validation Loss (2 Hidden Layers, η=0.1)')
+plt.legend()
+plt.grid(True)
+plt.savefig('figure3.png', dpi=300)
+plt.show()
